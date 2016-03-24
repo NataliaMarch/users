@@ -40,32 +40,41 @@ class DBConnect {
             $is_exist = false;
             $query = "SELECT * FROM users WHERE login='$login'";
             $res = mysqli_query($this->link, $query);
-            if ($res) {
+            $users = array();
+            while ($row = mysqli_fetch_assoc($res)) {
+                array_push($users, $row);
+            }
+            if (!empty($users)) {
                 $is_exist = true;
+                
             }
             $query = "SELECT * FROM users WHERE email='$email'";
             $res = mysqli_query($this->link, $query);
-            if ($res) {
-                $is_exist = true;
-                if (!$is_exist) {
-                    $insert_user = "INSERT INTO users (email, login, pass) VALUES ('$email','$login','$pass')";
-                    $insert = mysqli_query($this->link, $insert_user);
-                    if ($insert) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+            if (!empty($users)) {
+                $is_exist = true;    
+            } 
+            if (!$is_exist) {
+                $insert_user = "INSERT INTO users (email, login, pass) VALUES ('$email','$login','$pass')";
+                $insert = mysqli_query($this->link, $insert_user);
+                if ($insert) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
-        }
+        } 
     }
 
-    public function authUser($login, $pass) {
+   public function authUser($login, $pass) {
         if ($this->link) {
             $query = "SELECT * FROM users WHERE login='$login' AND pass='$pass'";
             $res = mysqli_query($this->link, $query);
             $is_exist = false;
-            if ($res) {
+            $users = array();
+            while ($row = mysqli_fetch_assoc($res)) {
+                array_push($users, $row);
+            }
+            if (!empty($users)) {
                 $is_exist = true;
             }
             return $is_exist;
