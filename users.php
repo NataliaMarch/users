@@ -10,7 +10,7 @@ for ($i = 0; $i < count($users); $i++) {
     $table_of_users.='<td>' . $users[$i]["login"] . '</td>';
     $table_of_users.='<td>' . $users[$i]["email"] . '</td>';
     $table_of_users.='<td><form method="POST"  action="json.php">';
-    $table_of_users.="<input type='submit'/> <input type='hidden' name=" . $i . " value='" . $users[$i]["id"] . "'/>";
+    $table_of_users.="<input type='submit' value='delete'/> <input type='hidden' name=" . $i . " value='" . $users[$i]["id"] . "'/>";
     $table_of_users.='</form>';
     $table_of_users.='</td>';
     $table_of_users.='</tr>';
