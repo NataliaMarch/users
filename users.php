@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once './library/DBConnect.php';
 $dbC = new DBConnect();
 $users = $dbC->getAllUsers();
@@ -16,7 +16,7 @@ for ($i = 0; $i < count($users); $i++) {
     $table_of_users.='</tr>';
 }
 $table_of_users.='</table>';
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     echo 'Please log in first!';
 } else {
     echo $table_of_users;
