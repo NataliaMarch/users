@@ -12,13 +12,10 @@ if (isset($_POST['login'])) {
     }
 }
 if (isset($_POST['enter_login'])) {
-    var_dump($_POST['enter_login']);
-    var_dump($_POST['enter_pass']);
     $auth = $db->authUser($_POST['enter_login'], $_POST['enter_pass']);
     if ($auth) {
         echo 'authentication is successful';
         $_SESSION['user'] = $_POST['enter_login'];
-        var_dump($_SESSION['user']);
     } else {
         echo'wrong login or password';
     }
